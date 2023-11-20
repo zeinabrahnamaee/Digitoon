@@ -2,7 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
-//    id("com.google.dagger.hilt.android")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -38,6 +38,7 @@ android {
 
     buildFeatures {
         dataBinding = true
+        viewBinding = true
     }
 }
 
@@ -80,7 +81,7 @@ dependencies {
     implementation("androidx.room:room-runtime:2.6.0-rc01")
     implementation("androidx.room:room-paging:2.6.0-rc01")
     implementation("androidx.room:room-ktx:2.6.0-rc01")
-//    kapt("androidx.room:room-compiler:2.6.0-rc01")
+    kapt("androidx.room:room-compiler:2.6.0-rc01")
 
     //nav
     implementation("androidx.navigation:navigation-fragment-ktx:2.4.2")
@@ -89,7 +90,7 @@ dependencies {
 
     //HILT
     implementation ("com.google.dagger:hilt-android:2.48.1")
-//    org.jetbrains.kotlin.kapt3.base.Kapt.kapt("com.google.dagger:hilt-compiler:2.48.1")
+    kapt("com.google.dagger:hilt-compiler:2.48.1")
 
 
 }

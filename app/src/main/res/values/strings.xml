@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Divar Task</string>
+    <string name="choose_city_title">لطفا شهر خود را انتخاب کنید.</string>
 </resources>

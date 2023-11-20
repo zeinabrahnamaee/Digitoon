@@ -6,4 +6,9 @@
     </style>
 
     <style name="Theme.DivarTask" parent="Base.Theme.DivarTask" />
+
+    <style name="TextStyle" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 </resources>
