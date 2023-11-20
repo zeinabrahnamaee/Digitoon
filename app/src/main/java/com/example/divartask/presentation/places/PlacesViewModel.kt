@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.divartask.data.base.Resource
 import com.example.divartask.data.entity.PlacesListData
 import com.example.divartask.domain.usecase.places.GetPlacesUseCase
-import com.example.myapplication.presentation.util.BaseViewState
+import com.example.divartask.presentation.util.BaseViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

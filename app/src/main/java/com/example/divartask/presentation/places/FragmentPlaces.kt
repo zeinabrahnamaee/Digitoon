@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.divartask.data.entity.PlacesListData
 import com.example.divartask.databinding.FragmentPlacesBinding
-import com.example.myapplication.presentation.util.BaseViewState
-import com.example.myapplication.presentation.util.flowLife
+import com.example.divartask.presentation.util.BaseViewState
+import com.example.divartask.presentation.util.flowLife
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

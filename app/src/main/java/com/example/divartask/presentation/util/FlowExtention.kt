@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation.util
+package com.example.divartask.presentation.util
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
