@@ -4,8 +4,8 @@ package com.example.divartask.data.entity
 import com.google.gson.annotations.SerializedName
 
 data class PostsData(
-    @SerializedName("posts")
-    val posts: List<Post>? = null
+    @SerializedName("widget_list")
+    val widgetList: List<Post>? = null
 ) {
     data class Post(
         @SerializedName("data")
