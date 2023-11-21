@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.divartask.data.entity.PlacesListData
 import com.example.divartask.databinding.PlacesItemLayoutBinding
 
-class PlacesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PlacesAdapter(
+    private val onItemClicked: (id: Int) -> Unit
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var cities: ArrayList<PlacesListData.City>?= null
 
     fun setData(dataList: ArrayList<PlacesListData.City>?){
@@ -28,6 +30,9 @@ class PlacesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         when(holder){
             is ItemsViewHolder -> {
                 holder.onBind(cities?.get(position))
+                holder.itemView.setOnClickListener {
+                    onItemClicked(cities?.get(position)?.id?:0)
+                }
             }
         }
     }

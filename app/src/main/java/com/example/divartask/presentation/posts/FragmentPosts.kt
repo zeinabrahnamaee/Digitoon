@@ -1,58 +1,59 @@
-package com.example.divartask.presentation.places
+package com.example.divartask.presentation.posts
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import com.example.divartask.R
+import androidx.navigation.fragment.navArgs
 import com.example.divartask.data.entity.PlacesListData
+import com.example.divartask.data.params.PostsParam
 import com.example.divartask.databinding.FragmentPlacesBinding
+import com.example.divartask.databinding.FragmentPostsBinding
 import com.example.divartask.presentation.util.BaseViewState
 import com.example.divartask.presentation.util.flowLife
 import dagger.hilt.android.AndroidEntryPoint
+import org.koin.core.parameter.parametersOf
+import kotlin.math.log
 
 @AndroidEntryPoint
-class FragmentPlaces : Fragment() {
+class FragmentPosts : Fragment() {
 
-    private var _mBinding: FragmentPlacesBinding? = null
+    private var _mBinding: FragmentPostsBinding? = null
     private val binding get() = _mBinding!!
 
-    private val viewModel by viewModels<PlacesViewModel>()
+    private val viewModel by viewModels<PostsViewModel>()
 
-    private var adapter: PlacesAdapter? = null
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _mBinding = FragmentPlacesBinding.inflate(inflater, container, false)
+        _mBinding = FragmentPostsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getPlaces()
-        adapter = PlacesAdapter(onItemClicked = { id ->
-            goToPostsFragment(id)
-        })
-        collectPlacesFlow()
+        viewModel.getPosts(arguments?.getInt("ID") ?: 0)
+
+        collectPostsFlow()
     }
 
-    private fun goToPostsFragment(id: Int) {
-        findNavController().navigate(R.id.fragmentPosts, bundleOf("ID" to id))
-    }
 
-    private fun collectPlacesFlow() {
-        flowLife(viewModel.placesState) {
+    private fun collectPostsFlow() {
+        flowLife(viewModel.postsState) {
             when (it) {
                 is BaseViewState.Success -> {
                     showLoading(false)
-                    setupRecycler(it.data)
+                    Log.e("DataResponse", it.data.toString(), )
                 }
 
                 is BaseViewState.ErrorString -> {}
@@ -66,17 +67,11 @@ class FragmentPlaces : Fragment() {
     private fun showLoading(isShow: Boolean) {
         if (isShow) {
             binding.rvPlaces.visibility = View.GONE
-            binding.chooseCity.visibility = View.GONE
             binding.progressLoading.visibility = View.VISIBLE
         } else {
             binding.rvPlaces.visibility = View.VISIBLE
-            binding.chooseCity.visibility = View.VISIBLE
             binding.progressLoading.visibility = View.GONE
         }
     }
 
-    private fun setupRecycler(data: PlacesListData) {
-        adapter?.setData(data.cities as ArrayList<PlacesListData.City>)
-        binding.rvPlaces.adapter = adapter
-    }
 }

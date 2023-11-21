@@ -36,10 +36,15 @@ android {
         jvmTarget = "17"
     }
 
+    kotlin {
+        jvmToolchain(17)
+    }
+
     buildFeatures {
         dataBinding = true
         viewBinding = true
     }
+
 }
 
 dependencies {
@@ -84,8 +89,8 @@ dependencies {
     kapt("androidx.room:room-compiler:2.6.0-rc01")
 
     //nav
-    implementation("androidx.navigation:navigation-fragment-ktx:2.4.2")
-    implementation("androidx.navigation:navigation-ui-ktx:2.4.2")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
 
 
     //HILT

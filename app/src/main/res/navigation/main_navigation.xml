@@ -6,7 +6,19 @@
 
     <fragment
         android:id="@+id/fragmentPlaces"
-        android:name="com.example.divartask.presentation.places.FragmentPlaces"/>
+        android:name="com.example.divartask.presentation.places.FragmentPlaces">
+
+        <action
+            android:id="@+id/goToPostsFragment"
+            app:destination="@id/fragmentPosts"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentPosts"
+        android:name="com.example.divartask.presentation.posts.FragmentPosts">
+
+    </fragment>
 
 
 </navigation>

@@ -1,10 +1,15 @@
 package com.example.divartask.di
 
+import android.util.Log
 import com.example.divartask.data.base.APIService
 import com.example.divartask.data.repository.places.PlacesRepositoryImp
+import com.example.divartask.data.repository.posts.PostsRepositoryImp
 import com.example.divartask.domain.repository.places.PlacesRepository
+import com.example.divartask.domain.repository.posts.PostsRepository
 import com.example.divartask.domain.usecase.places.GetPlacesUseCase
 import com.example.divartask.domain.usecase.places.GetPlacesUseCaseImp
+import com.example.divartask.domain.usecase.posts.GetPostsUseCase
+import com.example.divartask.domain.usecase.posts.GetPostsUseCaseImp
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,33 +28,31 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient() = OkHttpClient.Builder()
-        .addInterceptor(Interceptor(){
-            val token = ""
-
-            var newRequest = it.request().newBuilder()
-                .addHeader("x-access-token","$token")
-                .build()
-
-            it.proceed(newRequest)
-        })
-
-    @Provides
-    @Singleton
     fun provideRemoteApi(): APIService {
+
+        val logging = HttpLoggingInterceptor()
+// set your desired log level
+// set your desired log level
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY)
 
         val interceptor = HttpLoggingInterceptor()
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+
         val client = OkHttpClient.Builder()
-            .addInterceptor(Interceptor(){
+            .addInterceptor(interceptor)
+            .addInterceptor(Interceptor{
                 val token = "YXBpa2V5OjY5Y1dxVW8wNGhpNFdMdUdBT2IzMmRXZXQjsllsVzBtSkNiwU9yLUxEamNDUXFMSzJnR29mS3plZg=="
 
                 val newRequest = it.request().newBuilder()
                     .addHeader("x-access-token","Basic $token")
                     .build()
 
+                Log.e("Request", newRequest.toString(), )
+
                 it.proceed(newRequest)
-            }).build()
+
+            }
+            ).build()
 
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
@@ -85,5 +88,17 @@ object AppModule {
     @Singleton
     fun providePlacesUseCase(repository: PlacesRepository): GetPlacesUseCase {
         return GetPlacesUseCaseImp(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun providePostsRepository(apiService: APIService): PostsRepository {
+        return PostsRepositoryImp(apiService)
+    }
+
+    @Provides
+    @Singleton
+    fun providePostsUseCase(repository: PostsRepository): GetPostsUseCase {
+        return GetPostsUseCaseImp(repository)
     }
 }
