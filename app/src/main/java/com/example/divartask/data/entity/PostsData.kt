@@ -10,22 +10,22 @@ data class PostsData(
     data class Post(
         @SerializedName("data")
         val data: DataModel? = null,
-        @SerializedName("text")
-        val text: String? = null,
         @SerializedName("widget_type")
         val widgetType: String? = null
     )
 }
 
 data class DataModel(
+    @SerializedName("text")
+    val text: String? = null,
     @SerializedName("city")
     val city: String? = null,
+    @SerializedName("subtitle")
+    val subtitle: String? = null,
     @SerializedName("district")
     val district: String? = null,
     @SerializedName("price")
     val price: String? = null,
-    @SerializedName("subtitle")
-    val subtitle: String? = null,
     @SerializedName("thumbnail")
     val thumbnail: String? = null,
     @SerializedName("title")

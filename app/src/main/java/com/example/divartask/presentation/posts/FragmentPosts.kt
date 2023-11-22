@@ -26,8 +26,11 @@ class FragmentPosts : Fragment() {
 
     private val viewModel by viewModels<PostsViewModel>()
 
+    private var adapter: PostsAdapter? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        adapter = PostsAdapter()
 
     }
 
@@ -53,6 +56,8 @@ class FragmentPosts : Fragment() {
             when (it) {
                 is BaseViewState.Success -> {
                     showLoading(false)
+                    binding.rvPosts.adapter = adapter
+                    adapter?.submitList(it.data.widgetList)
                     Log.e("DataResponse", it.data.toString(), )
                 }
 
@@ -66,10 +71,10 @@ class FragmentPosts : Fragment() {
 
     private fun showLoading(isShow: Boolean) {
         if (isShow) {
-            binding.rvPlaces.visibility = View.GONE
+            binding.rvPosts.visibility = View.GONE
             binding.progressLoading.visibility = View.VISIBLE
         } else {
-            binding.rvPlaces.visibility = View.VISIBLE
+            binding.rvPosts.visibility = View.VISIBLE
             binding.progressLoading.visibility = View.GONE
         }
     }
