@@ -1,5 +1,6 @@
 package com.example.divartask.presentation.util
 
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -14,4 +15,14 @@ fun <T> Fragment.flowLife(flow: Flow<T>, collector: FlowCollector<T>) {
             flow.collect(collector)
         }
     }
+}
+
+fun Fragment.showToast( message: String) {
+    if (message.isNotEmpty())
+        this.view?.let {
+            Toast.makeText(
+                this.context,
+                message
+            , Toast.LENGTH_LONG).show()
+        }
 }

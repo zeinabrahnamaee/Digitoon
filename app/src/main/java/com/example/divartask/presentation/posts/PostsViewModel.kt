@@ -29,8 +29,12 @@ class PostsViewModel @Inject constructor(
         viewModelScope.launch {
             postsUseCase.invoke(id, PostsParam(0, paging)).collect{
                 when(it){
-                    is Resource.Error -> {}
-                    is Resource.Loading -> {}
+                    is Resource.Error -> {
+                        _postsState.value = BaseViewState.ErrorString(it.message)
+                    }
+                    is Resource.Loading -> {
+                        _postsState.value = BaseViewState.Loading
+                    }
                     is Resource.Success -> {
                         _postsState.value = BaseViewState.Success(it.data)
                     }

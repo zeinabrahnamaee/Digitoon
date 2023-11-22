@@ -26,7 +26,7 @@ class PlacesViewModel @Inject constructor(
             getPlacesUseCase.invoke().collect{ result ->
                 when(result){
                     is Resource.Error -> {_placesState.value = BaseViewState.ErrorString(result.toString())}
-                    is Resource.Loading -> {}
+                    is Resource.Loading -> {_placesState.value = BaseViewState.Loading}
                     is Resource.Success -> {
                         _placesState.value = BaseViewState.Success(result.data)
                     }

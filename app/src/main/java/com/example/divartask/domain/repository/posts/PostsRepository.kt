@@ -1,10 +1,11 @@
 package com.example.divartask.domain.repository.posts
 
-import com.example.divartask.data.base.Resource
+import com.example.divartask.data.network.APIErrorResponse
+import com.example.divartask.data.network.ErrorBody
+import com.example.divartask.data.network.NetworkResponse
 import com.example.divartask.data.entity.PostsData
 import com.example.divartask.data.params.PostsParam
-import kotlinx.coroutines.flow.Flow
 
 interface PostsRepository {
-    suspend fun getPosts(id: Int, postsParam: PostsParam): Flow<Resource<PostsData>>
+    suspend fun getPosts(id: Int, postsParam: PostsParam): NetworkResponse<PostsData, APIErrorResponse<ErrorBody>>
 }

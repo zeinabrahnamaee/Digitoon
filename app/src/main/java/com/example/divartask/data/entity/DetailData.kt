@@ -9,7 +9,7 @@ data class DetailData(
     @SerializedName("enable_contact")
     val enableContact: Boolean? = null,
     @SerializedName("widgets")
-    val widgets: List<Widget?>? = null
+    val widgets: List<Widget>? = null
 ) {
     data class Widget(
         @SerializedName("data")

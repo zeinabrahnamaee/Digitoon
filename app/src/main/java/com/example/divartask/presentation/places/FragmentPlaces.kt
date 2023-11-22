@@ -13,6 +13,7 @@ import com.example.divartask.data.entity.PlacesListData
 import com.example.divartask.databinding.FragmentPlacesBinding
 import com.example.divartask.presentation.util.BaseViewState
 import com.example.divartask.presentation.util.flowLife
+import com.example.divartask.presentation.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -55,7 +56,7 @@ class FragmentPlaces : Fragment() {
                     setupRecycler(it.data)
                 }
 
-                is BaseViewState.ErrorString -> {}
+                is BaseViewState.ErrorString -> { showToast(it.message)}
                 is BaseViewState.Loading -> {
                     showLoading(true)
                 }

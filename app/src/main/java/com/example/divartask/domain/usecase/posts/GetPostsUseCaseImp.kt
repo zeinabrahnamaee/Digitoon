@@ -1,5 +1,7 @@
 package com.example.divartask.domain.usecase.posts
 
+import com.example.divartask.data.network.APIErrorResponse
+import com.example.divartask.data.network.NetworkResponse
 import com.example.divartask.data.base.Resource
 import com.example.divartask.data.entity.PostsData
 import com.example.divartask.data.params.PostsParam
@@ -12,8 +14,24 @@ class GetPostsUseCaseImp @Inject constructor(
     private val repository: PostsRepository
 ): GetPostsUseCase {
     override fun invoke(id: Int, postsParam: PostsParam): Flow<Resource<PostsData>> = flow {
-        repository.getPosts(id, postsParam).collect{
-            emit(it)
+        val result = repository.getPosts(id, postsParam)
+        when(result){
+            is NetworkResponse.APIError -> {
+                emit(Resource.Error((result.apiErrorResponse as APIErrorResponse.NotFoundResponse).error.message?.errorMessage?:""))
+            }
+            is NetworkResponse.Empty -> {}
+            is NetworkResponse.NetworkError -> {
+                emit(Resource.Error(result.exception.toString()))
+            }
+            is NetworkResponse.ProtocolError -> {
+                emit(Resource.Error(result.exception.toString()))
+            }
+            is NetworkResponse.Success -> {
+                emit(Resource.Success(result.body))
+            }
+            is NetworkResponse.UnknownError -> {
+
+            }
         }
     }
 }

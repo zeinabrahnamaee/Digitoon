@@ -2,6 +2,7 @@ package com.example.divartask.di
 
 import android.util.Log
 import com.example.divartask.data.base.APIService
+import com.example.divartask.data.network.NetworkResponseAdapterFactory
 import com.example.divartask.data.repository.detail.DetailRepositoryImp
 import com.example.divartask.data.repository.places.PlacesRepositoryImp
 import com.example.divartask.data.repository.posts.PostsRepositoryImp
@@ -62,6 +63,7 @@ object AppModule {
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl("https://android-interview.divar.dev")
             .client(client)
+            .addCallAdapterFactory(NetworkResponseAdapterFactory())
             .build()
             .create(APIService::class.java)
     }

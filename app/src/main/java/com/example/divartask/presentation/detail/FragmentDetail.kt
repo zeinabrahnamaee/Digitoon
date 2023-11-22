@@ -1,6 +1,7 @@
 package com.example.divartask.presentation.detail
 
 import android.os.Bundle
+import android.text.Spannable.Factory
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -18,9 +19,12 @@ import com.example.divartask.databinding.FragmentPlacesBinding
 import com.example.divartask.databinding.FragmentPostsBinding
 import com.example.divartask.presentation.places.PlacesViewModel
 import com.example.divartask.presentation.util.BaseViewState
+import com.example.divartask.presentation.util.DetailWidgetTypeEnum
 import com.example.divartask.presentation.util.flowLife
+import com.example.divartask.presentation.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import org.koin.core.parameter.parametersOf
+import javax.annotation.meta.When
 import kotlin.math.log
 
 @AndroidEntryPoint
@@ -60,6 +64,10 @@ class FragmentDetail : Fragment() {
                 }
                 is BaseViewState.Loading -> {
                     showLoading(true)
+                }
+
+                is BaseViewState.ErrorString -> {
+                    showToast(it.message)
                 }
             }
         }
