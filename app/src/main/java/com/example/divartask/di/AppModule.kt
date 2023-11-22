@@ -2,10 +2,14 @@ package com.example.divartask.di
 
 import android.util.Log
 import com.example.divartask.data.base.APIService
+import com.example.divartask.data.repository.detail.DetailRepositoryImp
 import com.example.divartask.data.repository.places.PlacesRepositoryImp
 import com.example.divartask.data.repository.posts.PostsRepositoryImp
+import com.example.divartask.domain.repository.detail.DetailRepository
 import com.example.divartask.domain.repository.places.PlacesRepository
 import com.example.divartask.domain.repository.posts.PostsRepository
+import com.example.divartask.domain.usecase.detail.GetDetailUseCase
+import com.example.divartask.domain.usecase.detail.GetDetailUseCaseImp
 import com.example.divartask.domain.usecase.places.GetPlacesUseCase
 import com.example.divartask.domain.usecase.places.GetPlacesUseCaseImp
 import com.example.divartask.domain.usecase.posts.GetPostsUseCase
@@ -100,5 +104,17 @@ object AppModule {
     @Singleton
     fun providePostsUseCase(repository: PostsRepository): GetPostsUseCase {
         return GetPostsUseCaseImp(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDetailRepository(apiService: APIService): DetailRepository {
+        return DetailRepositoryImp(apiService)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDetailUseCase(repository: DetailRepository): GetDetailUseCase {
+        return GetDetailUseCaseImp(repository)
     }
 }

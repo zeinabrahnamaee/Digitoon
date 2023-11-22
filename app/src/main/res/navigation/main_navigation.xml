@@ -20,5 +20,11 @@
 
     </fragment>
 
+    <fragment
+        android:id="@+id/fragmentDetail"
+        android:name="com.example.divartask.presentation.detail.FragmentDetail">
+
+    </fragment>
+
 
 </navigation>

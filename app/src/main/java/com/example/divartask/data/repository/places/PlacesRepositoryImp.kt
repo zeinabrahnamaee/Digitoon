@@ -12,8 +12,6 @@ class PlacesRepositoryImp @Inject constructor(
     private val apiService: APIService
 ): PlacesRepository {
     override suspend fun getPlaces(): Flow<Resource<PlacesListData>> = flow {
-//        emit(Resource.Loading())
-
         emit(Resource.Success(apiService.getPlaces()))
     }
 

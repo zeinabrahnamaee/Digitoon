@@ -17,7 +17,9 @@ const val VIEW_TYPE_TITLE = 0
 const val VIEW_TYPE_SUBTITLE = 1
 const val VIEW_TYPE_POST = 2
 
-class PostsAdapter : ListAdapter<PostsData.Post, RecyclerView.ViewHolder>(RoomListDiffUtil()) {
+class PostsAdapter(
+    private val onItemClicked: (token: String) -> Unit
+) : ListAdapter<PostsData.Post, RecyclerView.ViewHolder>(RoomListDiffUtil()) {
 
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position).widgetType) {
@@ -70,7 +72,12 @@ class PostsAdapter : ListAdapter<PostsData.Post, RecyclerView.ViewHolder>(RoomLi
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(holder){
-            is PostViewHolder -> {holder.onBind(currentList[position])}
+            is PostViewHolder -> {
+                holder.onBind(currentList[position])
+                holder.itemView.setOnClickListener {
+                    onItemClicked.invoke(currentList[position].data?.token ?: "")
+                }
+            }
             is TitleViewHolder -> {holder.onBind(currentList[position])}
             is SubTitleViewHolder -> {holder.onBind(currentList[position])}
         }
