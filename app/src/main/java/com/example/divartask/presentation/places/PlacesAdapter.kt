@@ -3,7 +3,7 @@ package com.example.divartask.presentation.places
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.divartask.data.entity.PlacesListData
+import com.example.divartask.data.remote.entity.PlacesListData
 import com.example.divartask.databinding.PlacesItemLayoutBinding
 
 class PlacesAdapter(

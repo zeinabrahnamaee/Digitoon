@@ -1,9 +1,9 @@
 package com.example.divartask.domain.usecase.detail
 
-import com.example.divartask.data.network.APIErrorResponse
-import com.example.divartask.data.network.NetworkResponse
-import com.example.divartask.data.base.Resource
-import com.example.divartask.data.entity.DetailData
+import com.example.divartask.data.remote.network.APIErrorResponse
+import com.example.divartask.data.remote.network.NetworkResponse
+import com.example.divartask.data.remote.Resource
+import com.example.divartask.data.remote.entity.DetailData
 import com.example.divartask.domain.repository.detail.DetailRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

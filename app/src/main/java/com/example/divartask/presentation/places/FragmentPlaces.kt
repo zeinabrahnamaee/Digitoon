@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.divartask.R
-import com.example.divartask.data.entity.PlacesListData
+import com.example.divartask.data.remote.entity.PlacesListData
 import com.example.divartask.databinding.FragmentPlacesBinding
 import com.example.divartask.presentation.util.BaseViewState
 import com.example.divartask.presentation.util.flowLife

@@ -3,10 +3,9 @@ package com.example.divartask.presentation.posts
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.divartask.data.entity.PostsData
+import com.example.divartask.data.remote.entity.PostsData
 import com.example.divartask.databinding.PostViewItemBinding
 import com.example.divartask.databinding.ProgressbarLayoutBinding
 import com.example.divartask.databinding.SubtitleViewItemBinding

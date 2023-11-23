@@ -1,7 +1,6 @@
 package com.example.divartask.presentation.posts
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,21 +8,15 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.divartask.R
-import com.example.divartask.data.entity.PlacesListData
-import com.example.divartask.data.entity.PostsData
-import com.example.divartask.data.params.PostsParam
-import com.example.divartask.databinding.FragmentPlacesBinding
+import com.example.divartask.data.remote.entity.PostsData
 import com.example.divartask.databinding.FragmentPostsBinding
 import com.example.divartask.presentation.util.BaseViewState
 import com.example.divartask.presentation.util.flowLife
 import com.example.divartask.presentation.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
-import org.koin.core.parameter.parametersOf
-import kotlin.math.log
 
 @AndroidEntryPoint
 class FragmentPosts : Fragment() {

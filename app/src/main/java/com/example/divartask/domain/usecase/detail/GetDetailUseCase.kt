@@ -1,8 +1,7 @@
 package com.example.divartask.domain.usecase.detail
 
-import com.example.divartask.data.base.Resource
-import com.example.divartask.data.entity.DetailData
-import com.example.divartask.data.entity.PostsData
+import com.example.divartask.data.remote.Resource
+import com.example.divartask.data.remote.entity.DetailData
 import kotlinx.coroutines.flow.Flow
 
 interface GetDetailUseCase {

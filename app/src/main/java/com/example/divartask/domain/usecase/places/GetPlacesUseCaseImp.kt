@@ -1,9 +1,9 @@
 package com.example.divartask.domain.usecase.places
 
-import com.example.divartask.data.network.APIErrorResponse
-import com.example.divartask.data.network.NetworkResponse
-import com.example.divartask.data.base.Resource
-import com.example.divartask.data.entity.PlacesListData
+import com.example.divartask.data.remote.network.APIErrorResponse
+import com.example.divartask.data.remote.network.NetworkResponse
+import com.example.divartask.data.remote.Resource
+import com.example.divartask.data.remote.entity.PlacesListData
 import com.example.divartask.domain.repository.places.PlacesRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

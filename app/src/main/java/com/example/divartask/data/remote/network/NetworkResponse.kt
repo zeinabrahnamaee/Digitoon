@@ -1,4 +1,4 @@
-package com.example.divartask.data.network
+package com.example.divartask.data.remote.network
 
 import java.io.IOException
 import java.net.ProtocolException

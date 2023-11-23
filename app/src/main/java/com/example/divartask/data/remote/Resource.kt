@@ -1,4 +1,4 @@
-package com.example.divartask.data.base
+package com.example.divartask.data.remote
 
 
 sealed class Resource<T> {

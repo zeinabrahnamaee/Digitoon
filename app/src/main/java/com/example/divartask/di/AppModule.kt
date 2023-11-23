@@ -1,8 +1,8 @@
 package com.example.divartask.di
 
 import android.util.Log
-import com.example.divartask.data.base.APIService
-import com.example.divartask.data.network.NetworkResponseAdapterFactory
+import com.example.divartask.data.remote.APIService
+import com.example.divartask.data.remote.network.NetworkResponseAdapterFactory
 import com.example.divartask.data.repository.detail.DetailRepositoryImp
 import com.example.divartask.data.repository.places.PlacesRepositoryImp
 import com.example.divartask.data.repository.posts.PostsRepositoryImp

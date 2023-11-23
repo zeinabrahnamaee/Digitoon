@@ -2,13 +2,12 @@ package com.example.divartask.presentation.posts
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.divartask.data.base.Resource
-import com.example.divartask.data.entity.PostsData
-import com.example.divartask.data.params.PostsParam
+import com.example.divartask.data.remote.Resource
+import com.example.divartask.data.remote.entity.PostsData
+import com.example.divartask.data.remote.params.PostsParam
 import com.example.divartask.domain.usecase.posts.GetPostsUseCase
 import com.example.divartask.presentation.util.BaseViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch

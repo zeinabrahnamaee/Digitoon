@@ -1,4 +1,4 @@
-package com.example.divartask.data.network
+package com.example.divartask.data.remote.network
 
 
 import okhttp3.Request

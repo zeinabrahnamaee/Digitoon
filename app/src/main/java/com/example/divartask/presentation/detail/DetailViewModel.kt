@@ -2,13 +2,11 @@ package com.example.divartask.presentation.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.divartask.data.base.Resource
-import com.example.divartask.data.entity.DetailData
-import com.example.divartask.data.entity.PostsData
+import com.example.divartask.data.remote.Resource
+import com.example.divartask.data.remote.entity.DetailData
 import com.example.divartask.domain.model.DetailDomain
 import com.example.divartask.domain.usecase.detail.GetDetailUseCase
 import com.example.divartask.presentation.util.BaseViewState
-import com.example.divartask.presentation.util.DetailWidgetTypeEnum
 import com.example.divartask.presentation.util.convertToDomainModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow

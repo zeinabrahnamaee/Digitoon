@@ -1,4 +1,4 @@
-package com.example.divartask.data.entity
+package com.example.divartask.data.remote.entity
 
 
 import com.google.gson.annotations.SerializedName
