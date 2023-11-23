@@ -77,6 +77,7 @@ class FragmentPosts : Fragment() {
                 is BaseViewState.ErrorString -> {
                     showLoading(false)
                     showToast(it.message)
+
                 }
                 is BaseViewState.Loading -> {
                     showLoading(true)
