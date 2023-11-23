@@ -1,13 +1,26 @@
 package com.example.divartask.presentation.util
 
+import android.graphics.drawable.Drawable
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.Target
+import com.example.divartask.R
+import com.example.divartask.data.entity.DetailData
+import com.example.divartask.domain.model.DetailDomain
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.launch
+import okhttp3.internal.filterList
 
 fun <T> Fragment.flowLife(flow: Flow<T>, collector: FlowCollector<T>) {
     viewLifecycleOwner.lifecycleScope.launch {
@@ -25,4 +38,48 @@ fun Fragment.showToast( message: String) {
                 message
             , Toast.LENGTH_LONG).show()
         }
+}
+
+fun DetailData.convertToDomainModel(): DetailDomain{
+    val widgetList: ArrayList< DetailDomain.Widget> = arrayListOf()
+    val items: ArrayList<String> = arrayListOf()
+    widgets?.forEach {
+        it.data?.items?.forEach {
+            items.add(it?.imageUrl?:"")
+        }
+        widgetList.add(
+            DetailDomain.Widget(
+                DetailDomain.Widget.Data(
+                    it.data?.imageUrl?: "",
+                    items,
+                    it.data?.showThumbnail?: false,
+                    it.data?.subtitle?: "",
+                    it.data?.text?: "",
+                    it.data?.title?: "",
+                    it.data?.value?: ""
+                ),
+                it.widgetType?:""
+            )
+        )
+    }
+    return DetailDomain(
+        contactButtonText?: "",
+        enableContact?: false,
+        widgetList
+    )
+}
+
+fun ImageView.loadImageToView(url: String) {
+
+    if (url.isNotEmpty()) {
+
+        Glide.with(this)
+            .load(url)
+            .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+            .skipMemoryCache(false)
+            .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.RESOURCE))
+            .into(this)
+    }
+
+
 }

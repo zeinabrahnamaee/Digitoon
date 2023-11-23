@@ -56,7 +56,10 @@ class FragmentPlaces : Fragment() {
                     setupRecycler(it.data)
                 }
 
-                is BaseViewState.ErrorString -> { showToast(it.message)}
+                is BaseViewState.ErrorString -> {
+                    showLoading(false)
+                    showToast(it.message)
+                }
                 is BaseViewState.Loading -> {
                     showLoading(true)
                 }

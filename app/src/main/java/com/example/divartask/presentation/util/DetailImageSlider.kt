@@ -58,7 +58,7 @@ class DetailImagesSliderAdapter(private val dataList: List<String?>) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(image: String?) {
-//            image?.let { binding.imageView.loadImageToView(it) }
+            image?.let { binding.imageView.loadImageToView(it) }
         }
     }
 }

@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.divartask.R
 import com.example.divartask.data.entity.PlacesListData
+import com.example.divartask.data.entity.PostsData
 import com.example.divartask.data.params.PostsParam
 import com.example.divartask.databinding.FragmentPlacesBinding
 import com.example.divartask.databinding.FragmentPostsBinding
@@ -37,7 +38,7 @@ class FragmentPosts : Fragment() {
         adapter = PostsAdapter(onItemClicked = {
             goToDetailFragment(it)
         })
-
+        viewModel.getPosts(arguments?.getInt("ID") ?: 0)
     }
 
     private fun goToDetailFragment(token: String) {
@@ -55,8 +56,6 @@ class FragmentPosts : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getPosts(arguments?.getInt("ID") ?: 0)
-
         collectPostsFlow()
     }
 
@@ -66,16 +65,23 @@ class FragmentPosts : Fragment() {
             when (it) {
                 is BaseViewState.Success -> {
                     showLoading(false)
-                    binding.rvPosts.adapter = adapter
-                    adapter?.submitList(it.data.widgetList)
+                    setupRecycler(it.data.widgetList)
                 }
 
-                is BaseViewState.ErrorString -> {showToast(it.message)}
+                is BaseViewState.ErrorString -> {
+                    showLoading(false)
+                    showToast(it.message)
+                }
                 is BaseViewState.Loading -> {
                     showLoading(true)
                 }
             }
         }
+    }
+
+    private fun setupRecycler(widgetList: List<PostsData.Post>?) {
+        binding.rvPosts.adapter = adapter
+        adapter?.submitList(widgetList)
     }
 
     private fun showLoading(isShow: Boolean) {
