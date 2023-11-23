@@ -8,6 +8,7 @@ import com.example.divartask.data.params.PostsParam
 import com.example.divartask.domain.usecase.posts.GetPostsUseCase
 import com.example.divartask.presentation.util.BaseViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -19,7 +20,6 @@ class PostsViewModel @Inject constructor(
 ) : ViewModel() {
 
     private var paging: Int = -1
-
 
     private val _postsState = MutableStateFlow<BaseViewState<PostsData>>(BaseViewState.Loading)
     val postsState = _postsState.asStateFlow()
@@ -36,6 +36,7 @@ class PostsViewModel @Inject constructor(
                         _postsState.value = BaseViewState.Loading
                     }
                     is Resource.Success -> {
+                        if(it.data.widgetList?.isNotEmpty() == true)
                         _postsState.value = BaseViewState.Success(it.data)
                     }
                 }

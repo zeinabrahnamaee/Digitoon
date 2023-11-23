@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.divartask.R
 import com.example.divartask.data.entity.PlacesListData
 import com.example.divartask.data.entity.PostsData
@@ -32,13 +34,15 @@ class FragmentPosts : Fragment() {
     private val viewModel by viewModels<PostsViewModel>()
 
     private var adapter: PostsAdapter? = null
+    private var id: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         adapter = PostsAdapter(onItemClicked = {
             goToDetailFragment(it)
         })
-        viewModel.getPosts(arguments?.getInt("ID") ?: 0)
+        id = arguments?.getInt("ID") ?: 0
+        viewModel.getPosts(id)
     }
 
     private fun goToDetailFragment(token: String) {
@@ -56,6 +60,7 @@ class FragmentPosts : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupRecycler()
         collectPostsFlow()
     }
 
@@ -65,7 +70,8 @@ class FragmentPosts : Fragment() {
             when (it) {
                 is BaseViewState.Success -> {
                     showLoading(false)
-                    setupRecycler(it.data.widgetList)
+                    adapter?.showLoading(false)
+                    setDataToRecycler(it.data.widgetList?: arrayListOf())
                 }
 
                 is BaseViewState.ErrorString -> {
@@ -79,9 +85,27 @@ class FragmentPosts : Fragment() {
         }
     }
 
-    private fun setupRecycler(widgetList: List<PostsData.Post>?) {
+    private fun setDataToRecycler(widgetList: List<PostsData.Post>){
+        adapter?.setData(widgetList as ArrayList<PostsData.Post?>)
+    }
+    private fun setupRecycler() {
         binding.rvPosts.adapter = adapter
-        adapter?.submitList(widgetList)
+        binding.rvPosts.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+            }
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                (recyclerView.layoutManager as? LinearLayoutManager)?.let {
+                    if (it.findLastCompletelyVisibleItemPosition() == it.itemCount- 1) {
+                        adapter?.showLoading(true)
+                        viewModel.getPosts(id)
+                    }
+                }
+
+            }
+        })
     }
 
     private fun showLoading(isShow: Boolean) {
