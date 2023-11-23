@@ -1,8 +1,9 @@
-package com.example.divartask
+package com.example.divartask.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
+import com.example.divartask.R
 import com.example.divartask.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
