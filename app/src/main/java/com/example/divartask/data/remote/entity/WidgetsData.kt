@@ -3,11 +3,11 @@ package com.example.divartask.data.remote.entity
 
 import com.google.gson.annotations.SerializedName
 
-data class PostsData(
+data class Widgets(
     @SerializedName("widget_list")
-    val widgetList: List<Post>? = null
+    val widgetList: List<Widget>? = null
 ) {
-    data class Post(
+    data class Widget(
         @SerializedName("data")
         val data: DataModel? = null,
         @SerializedName("widget_type")
