@@ -40,7 +40,7 @@ class PlacesRepositoryImp @Inject constructor(
         emit(Resource.Success(dao.getCities().convertToPlacesDomainModel()))
     }.flowOn(Dispatchers.IO)
 
-    fun convertToEntities(result: NetworkResponse<PlacesListData, APIErrorResponse<ErrorBody>>): List<PlacesEntity>{
+    private fun convertToEntities(result: NetworkResponse<PlacesListData, APIErrorResponse<ErrorBody>>): List<PlacesEntity>{
         val cityList: ArrayList<PlacesEntity> = arrayListOf()
         if (result is NetworkResponse.Success){
             result.body.cities?.forEach {

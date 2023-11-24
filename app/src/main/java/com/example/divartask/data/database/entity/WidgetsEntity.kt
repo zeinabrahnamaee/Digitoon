@@ -6,12 +6,12 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "WIDGETS_TABLE")
 data class WidgetsEntity(
-    @ColumnInfo(name = "CITY_ID" )
+    @ColumnInfo(name = "CITY_ID")
     var cityID: Int,
     @ColumnInfo(name = "WIDGET_TYPE" )
     var widgetType: String,
     @ColumnInfo(name = "TEXT" )
-    var text: Int,
+    var text: String,
     @ColumnInfo(name = "SUBTITLE" )
     var subTitle: String,
     @ColumnInfo(name = "DISTRICT" )

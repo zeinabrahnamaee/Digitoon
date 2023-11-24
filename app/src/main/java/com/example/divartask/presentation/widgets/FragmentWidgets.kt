@@ -11,8 +11,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.divartask.R
-import com.example.divartask.data.remote.entity.Widgets
 import com.example.divartask.databinding.FragmentWidgetsBinding
+import com.example.divartask.domain.model.WidgetsDomain
 import com.example.divartask.presentation.util.BaseViewState
 import com.example.divartask.presentation.util.flowLife
 import com.example.divartask.presentation.util.showToast
@@ -64,7 +64,7 @@ class FragmentWidgets : Fragment() {
                 is BaseViewState.Success -> {
                     showLoading(false)
                     adapter?.showLoading(false)
-                    setDataToRecycler(it.data.widgetList?: arrayListOf())
+                    setDataToRecycler(it.data)
                 }
 
                 is BaseViewState.ErrorString -> {
@@ -79,8 +79,9 @@ class FragmentWidgets : Fragment() {
         }
     }
 
-    private fun setDataToRecycler(widgetList: List<Widgets.Widget>){
-        adapter?.setData(widgetList as ArrayList<Widgets.Widget?>)
+    private fun setDataToRecycler(widgetList: List<WidgetsDomain>){
+        if(widgetList.isNotEmpty())
+        adapter?.setData(widgetList as ArrayList<WidgetsDomain>)
     }
     private fun setupRecycler() {
         binding.rvPosts.adapter = adapter

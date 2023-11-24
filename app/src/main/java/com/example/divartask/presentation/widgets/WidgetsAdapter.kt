@@ -10,6 +10,7 @@ import com.example.divartask.databinding.ProgressbarLayoutBinding
 import com.example.divartask.databinding.SubtitleViewItemBinding
 import com.example.divartask.databinding.TitleViewItemBinding
 import com.example.divartask.databinding.WidgetViewItemBinding
+import com.example.divartask.domain.model.WidgetsDomain
 import com.example.divartask.presentation.util.WidgetTypeEnum
 
 
@@ -21,8 +22,8 @@ const val VIEW_TYPE_LOADING = 3
 class PostsAdapter(
     private val onItemClicked: (token: String) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    var postList: ArrayList<Widgets.Widget?> = arrayListOf()
-    fun setData(list: ArrayList<Widgets.Widget?>){
+    var postList: ArrayList<WidgetsDomain?> = arrayListOf()
+    fun setData(list: ArrayList<WidgetsDomain>){
         val oldSize = postList.size
         postList.addAll(list)
         notifyItemRangeChanged(oldSize,list.size)
@@ -106,7 +107,7 @@ class PostsAdapter(
             is PostViewHolder -> {
                 holder.onBind(postList[position])
                 holder.itemView.setOnClickListener {
-                    onItemClicked.invoke(postList[position]?.data?.token ?: "")
+                    onItemClicked.invoke(postList[position]?.token?:"")
                 }
             }
             is TitleViewHolder -> {holder.onBind(postList[position])}
@@ -122,13 +123,13 @@ class PostsAdapter(
     inner class PostViewHolder(
         private val binding: WidgetViewItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(post: Widgets.Widget?) {
-            binding.title.text = post?.data?.title
-            binding.price.text = post?.data?.price
-            binding.district.text = post?.data?.district
+        fun onBind(post: WidgetsDomain?) {
+            binding.title.text = post?.title
+            binding.price.text = post?.price
+            binding.district.text = post?.district
 
             Glide.with(binding.root.context)
-                .load(post?.data?.thumbnail)
+                .load(post?.thumbnail)
                 .into(binding.logo)
         }
     }
@@ -136,16 +137,16 @@ class PostsAdapter(
     inner class TitleViewHolder(
         private val binding: TitleViewItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(post: Widgets.Widget?) {
-            binding.textTitle.text = post?.data?.text
+        fun onBind(post: WidgetsDomain?) {
+            binding.textTitle.text = post?.text
         }
     }
 
     inner class SubTitleViewHolder(
         private val binding: SubtitleViewItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(post: Widgets.Widget?) {
-            binding.textSubTitle.text = post?.data?.text
+        fun onBind(post: WidgetsDomain?) {
+            binding.textSubTitle.text = post?.text
         }
     }
 }

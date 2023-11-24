@@ -10,9 +10,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.example.divartask.data.database.entity.PlacesEntity
+import com.example.divartask.data.database.entity.WidgetsEntity
 import com.example.divartask.data.remote.entity.DetailData
 import com.example.divartask.domain.model.DetailDomain
 import com.example.divartask.domain.model.PlacesDomain
+import com.example.divartask.domain.model.WidgetsDomain
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.launch
@@ -83,6 +85,27 @@ fun List<PlacesEntity>.convertToPlacesDomainModel(): List<PlacesDomain>{
     this.forEach {
         list.add(
             PlacesDomain(it.cityName, it.cityID)
+        )
+    }
+    return list
+}
+
+fun List<WidgetsEntity>.convertToWidgetsDomainModel(): List<WidgetsDomain>{
+
+    val list: ArrayList<WidgetsDomain> = arrayListOf()
+    this.forEach {
+        list.add(
+            WidgetsDomain(
+                it.cityID,
+                it.widgetType,
+                it.text,
+                it.subTitle,
+                it.district,
+                it.price,
+                it.thumbnail,
+                it.title,
+                it.token
+            )
         )
     }
     return list

@@ -1,17 +1,17 @@
 package com.example.divartask.data.database.dao
 
 import androidx.room.*
-import com.example.divartask.data.database.entity.PlacesEntity
+import com.example.divartask.data.database.entity.WidgetsEntity
 
 
 @Dao
 interface WidgetsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertWidgets(places: List<PlacesEntity>)
+    fun insertWidgets(widgets: List<WidgetsEntity>)
 
-    @Query("SELECT * FROM WIDGETS_TABLE")
-    fun getWidgets(): List<PlacesEntity>
+    @Query("SELECT * FROM WIDGETS_TABLE where city_id=:id")
+    fun getWidgets(id: Int): List<WidgetsEntity>
 
-    @Query("SELECT FIRST(id) FROM WIDGETS_TABLE")
-    fun getId(): Int
+    @Query("SELECT COUNT(id) FROM WIDGETS_TABLE where city_id=:id")
+    fun getCount(id: Int): Int
 }

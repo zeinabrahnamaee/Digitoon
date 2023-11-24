@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.room.Room
 import com.example.divartask.data.database.AppDatabase
 import com.example.divartask.data.database.dao.PlacesDao
+import com.example.divartask.data.database.dao.WidgetsDao
 import com.example.divartask.data.remote.APIService
 import com.example.divartask.data.remote.network.NetworkResponseAdapterFactory
 import com.example.divartask.data.repository.detail.DetailRepositoryImp
@@ -73,34 +74,6 @@ object AppModule {
             .create(APIService::class.java)
     }
 
-//    @Provides
-//    @Singleton
-//    fun provideAppDatabase(@ApplicationContext appContext: Context): LoginDatabase {
-//        return Room.databaseBuilder(
-//            appContext,
-//            LoginDatabase::class.java,
-//            "Database"
-//        ).build()
-//    }
-
-//    @Provides
-//    @Singleton
-//    fun provideDb(database: LoginDatabase): LoginDao {
-//        return database.loginDao()
-//    }
-
-    @Provides
-    @Singleton
-    fun providePostsRepository(apiService: APIService): WidgetsRepository {
-        return WidgetsRepositoryImp(apiService)
-    }
-
-    @Provides
-    @Singleton
-    fun providePostsUseCase(repository: WidgetsRepository): GetWidgetsUseCase {
-        return GetWidgetsUseCaseImp(repository)
-    }
-
     @Provides
     @Singleton
     fun provideDetailRepository(apiService: APIService): DetailRepository {
@@ -140,5 +113,23 @@ object AppModule {
     @Singleton
     fun providePlacesUseCase(repository: PlacesRepository): GetPlacesUseCase {
         return GetPlacesUseCaseImp(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideWidgetsDao(database: AppDatabase): WidgetsDao {
+        return database.widgetsDao()
+    }
+
+    @Provides
+    @Singleton
+    fun providePostsRepository(apiService: APIService, dao: WidgetsDao): WidgetsRepository {
+        return WidgetsRepositoryImp(apiService, dao)
+    }
+
+    @Provides
+    @Singleton
+    fun providePostsUseCase(repository: WidgetsRepository): GetWidgetsUseCase {
+        return GetWidgetsUseCaseImp(repository)
     }
 }

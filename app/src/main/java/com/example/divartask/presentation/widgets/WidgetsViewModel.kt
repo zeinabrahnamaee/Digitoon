@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.divartask.data.remote.Resource
 import com.example.divartask.data.remote.entity.Widgets
 import com.example.divartask.data.remote.params.WidgetsParam
+import com.example.divartask.domain.model.WidgetsDomain
 import com.example.divartask.domain.usecase.widgets.GetWidgetsUseCase
 import com.example.divartask.presentation.util.BaseViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,7 +21,7 @@ class WidgetsViewModel @Inject constructor(
 
     private var paging: Int = -1
 
-    private val _widgetsState = MutableStateFlow<BaseViewState<Widgets>>(BaseViewState.Loading)
+    private val _widgetsState = MutableStateFlow<BaseViewState<List<WidgetsDomain>>>(BaseViewState.Loading)
     val widgetsState = _widgetsState.asStateFlow()
 
     fun getWidgets(id: Int){
@@ -35,7 +36,6 @@ class WidgetsViewModel @Inject constructor(
                         _widgetsState.value = BaseViewState.Loading
                     }
                     is Resource.Success -> {
-                        if(it.data.widgetList?.isNotEmpty() == true)
                         _widgetsState.value = BaseViewState.Success(it.data)
                     }
                 }
