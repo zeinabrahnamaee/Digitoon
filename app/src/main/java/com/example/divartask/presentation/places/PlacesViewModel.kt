@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.divartask.data.remote.Resource
 import com.example.divartask.data.remote.entity.PlacesListData
+import com.example.divartask.domain.model.PlacesDomain
 import com.example.divartask.domain.usecase.places.GetPlacesUseCase
 import com.example.divartask.presentation.util.BaseViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +18,7 @@ class PlacesViewModel @Inject constructor(
     private val getPlacesUseCase: GetPlacesUseCase
 ) : ViewModel() {
 
-    private val _placesState = MutableStateFlow<BaseViewState<PlacesListData>>(BaseViewState.Loading)
+    private val _placesState = MutableStateFlow<BaseViewState<List<PlacesDomain>>>(BaseViewState.Loading)
     val placesState = _placesState.asStateFlow()
 
     fun getPlaces(){

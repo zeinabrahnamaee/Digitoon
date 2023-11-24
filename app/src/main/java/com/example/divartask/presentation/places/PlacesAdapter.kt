@@ -3,15 +3,15 @@ package com.example.divartask.presentation.places
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.divartask.data.remote.entity.PlacesListData
 import com.example.divartask.databinding.PlacesItemLayoutBinding
+import com.example.divartask.domain.model.PlacesDomain
 
 class PlacesAdapter(
     private val onItemClicked: (id: Int) -> Unit
 ) : RecyclerView.Adapter<PlacesAdapter.ItemsViewHolder>() {
-    private var cities: ArrayList<PlacesListData.City>?= null
+    private var cities: ArrayList<PlacesDomain>?= null
 
-    fun setData(dataList: ArrayList<PlacesListData.City>?){
+    fun setData(dataList: ArrayList<PlacesDomain>){
         cities = dataList
     }
 
@@ -29,7 +29,7 @@ class PlacesAdapter(
     override fun onBindViewHolder(holder: ItemsViewHolder, position: Int) {
         holder.onBind(cities?.get(position))
         holder.itemView.setOnClickListener {
-            onItemClicked(cities?.get(position)?.id ?: 0)
+            onItemClicked(cities?.get(position)?.cityId ?: 0)
         }
     }
 
@@ -37,8 +37,8 @@ class PlacesAdapter(
         RecyclerView.ViewHolder(
             binding.root
         ) {
-        fun onBind(data: PlacesListData.City?) {
-            binding.cityName.text =  data?.name
+        fun onBind(data: PlacesDomain?) {
+            binding.cityName.text =  data?.cityName
         }
     }
 }

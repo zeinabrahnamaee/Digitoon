@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.divartask.R
-import com.example.divartask.data.remote.entity.PlacesListData
 import com.example.divartask.databinding.FragmentPlacesBinding
+import com.example.divartask.domain.model.PlacesDomain
 import com.example.divartask.presentation.util.BaseViewState
 import com.example.divartask.presentation.util.flowLife
 import com.example.divartask.presentation.util.showToast
@@ -79,8 +79,8 @@ class FragmentPlaces : Fragment() {
         }
     }
 
-    private fun setupRecycler(data: PlacesListData) {
-        adapter?.setData(data.cities as ArrayList<PlacesListData.City>)
+    private fun setupRecycler(data: List<PlacesDomain>) {
+        adapter?.setData(data as ArrayList<PlacesDomain>)
         binding.rvPlaces.adapter = adapter
     }
 }

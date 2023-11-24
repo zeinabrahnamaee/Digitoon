@@ -1,6 +1,10 @@
 package com.example.divartask.di
 
+import android.content.Context
 import android.util.Log
+import androidx.room.Room
+import com.example.divartask.data.database.AppDatabase
+import com.example.divartask.data.database.PlacesDao
 import com.example.divartask.data.remote.APIService
 import com.example.divartask.data.remote.network.NetworkResponseAdapterFactory
 import com.example.divartask.data.repository.detail.DetailRepositoryImp
@@ -18,6 +22,7 @@ import com.example.divartask.domain.usecase.posts.GetPostsUseCaseImp
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -86,18 +91,6 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun providePlacesRepository(apiService: APIService): PlacesRepository {
-        return PlacesRepositoryImp(apiService)
-    }
-
-    @Provides
-    @Singleton
-    fun providePlacesUseCase(repository: PlacesRepository): GetPlacesUseCase {
-        return GetPlacesUseCaseImp(repository)
-    }
-
-    @Provides
-    @Singleton
     fun providePostsRepository(apiService: APIService): PostsRepository {
         return PostsRepositoryImp(apiService)
     }
@@ -118,5 +111,34 @@ object AppModule {
     @Singleton
     fun provideDetailUseCase(repository: DetailRepository): GetDetailUseCase {
         return GetDetailUseCaseImp(repository)
+    }
+
+
+    @Provides
+    @Singleton
+    fun provideAppDatabase(@ApplicationContext appContext: Context): AppDatabase {
+        return Room.databaseBuilder(
+            appContext,
+            AppDatabase::class.java,
+            "Database"
+        ).build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideDao(database: AppDatabase): PlacesDao {
+        return database.placesDao()
+    }
+
+    @Provides
+    @Singleton
+    fun providePlacesRepository(apiService: APIService, dao: PlacesDao): PlacesRepository {
+        return PlacesRepositoryImp(apiService, dao)
+    }
+
+    @Provides
+    @Singleton
+    fun providePlacesUseCase(repository: PlacesRepository): GetPlacesUseCase {
+        return GetPlacesUseCaseImp(repository)
     }
 }
