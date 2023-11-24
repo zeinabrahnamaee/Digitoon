@@ -9,9 +9,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
-import com.example.divartask.data.database.PlacesEntity
+import com.example.divartask.data.database.entity.PlacesEntity
 import com.example.divartask.data.remote.entity.DetailData
-import com.example.divartask.data.remote.entity.PlacesListData
 import com.example.divartask.domain.model.DetailDomain
 import com.example.divartask.domain.model.PlacesDomain
 import kotlinx.coroutines.flow.Flow

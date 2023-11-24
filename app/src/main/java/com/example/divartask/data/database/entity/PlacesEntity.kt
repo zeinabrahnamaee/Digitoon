@@ -1,4 +1,4 @@
-package com.example.divartask.data.database
+package com.example.divartask.data.database.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

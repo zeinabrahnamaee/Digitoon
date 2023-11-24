@@ -1,7 +1,7 @@
 package com.example.divartask.data.repository.places
 
-import com.example.divartask.data.database.PlacesDao
-import com.example.divartask.data.database.PlacesEntity
+import com.example.divartask.data.database.dao.PlacesDao
+import com.example.divartask.data.database.entity.PlacesEntity
 import com.example.divartask.data.remote.network.APIErrorResponse
 import com.example.divartask.data.remote.APIService
 import com.example.divartask.data.remote.Resource

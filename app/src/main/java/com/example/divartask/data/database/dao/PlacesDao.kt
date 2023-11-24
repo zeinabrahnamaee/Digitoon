@@ -1,6 +1,7 @@
-package com.example.divartask.data.database
+package com.example.divartask.data.database.dao
 
 import androidx.room.*
+import com.example.divartask.data.database.entity.PlacesEntity
 
 
 @Dao

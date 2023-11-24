@@ -14,7 +14,7 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface APIService {
-    @GET("/api/v1/place/liste")
+    @GET("/api/v1/place/list")
     suspend fun getPlaces(): NetworkResponse<PlacesListData, APIErrorResponse<ErrorBody>>
 
     @POST("/api/v1/post/list")

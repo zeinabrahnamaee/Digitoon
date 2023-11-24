@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.room.Room
 import com.example.divartask.data.database.AppDatabase
-import com.example.divartask.data.database.PlacesDao
+import com.example.divartask.data.database.dao.PlacesDao
 import com.example.divartask.data.remote.APIService
 import com.example.divartask.data.remote.network.NetworkResponseAdapterFactory
 import com.example.divartask.data.repository.detail.DetailRepositoryImp
