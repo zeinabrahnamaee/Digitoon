@@ -16,7 +16,7 @@
 
     <fragment
         android:id="@+id/fragmentPosts"
-        android:name="com.example.divartask.presentation.posts.FragmentPosts">
+        android:name="com.example.divartask.presentation.widgets.FragmentWidgets">
 
     </fragment>
 

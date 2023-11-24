@@ -1,11 +1,11 @@
-package com.example.divartask.presentation.posts
+package com.example.divartask.presentation.widgets
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.divartask.data.remote.Resource
-import com.example.divartask.data.remote.entity.PostsData
-import com.example.divartask.data.remote.params.PostsParam
-import com.example.divartask.domain.usecase.posts.GetPostsUseCase
+import com.example.divartask.data.remote.entity.Widgets
+import com.example.divartask.data.remote.params.WidgetsParam
+import com.example.divartask.domain.usecase.widgets.GetWidgetsUseCase
 import com.example.divartask.presentation.util.BaseViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,29 +14,29 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PostsViewModel @Inject constructor(
-    private val postsUseCase: GetPostsUseCase
+class WidgetsViewModel @Inject constructor(
+    private val postsUseCase: GetWidgetsUseCase
 ) : ViewModel() {
 
     private var paging: Int = -1
 
-    private val _postsState = MutableStateFlow<BaseViewState<PostsData>>(BaseViewState.Loading)
-    val postsState = _postsState.asStateFlow()
+    private val _widgetsState = MutableStateFlow<BaseViewState<Widgets>>(BaseViewState.Loading)
+    val widgetsState = _widgetsState.asStateFlow()
 
-    fun getPosts(id: Int){
+    fun getWidgets(id: Int){
         paging ++
         viewModelScope.launch {
-            postsUseCase.invoke(id, PostsParam(0, paging)).collect{
+            postsUseCase.invoke(id, WidgetsParam(0, paging)).collect{
                 when(it){
                     is Resource.Error -> {
-                        _postsState.value = BaseViewState.ErrorString(it.message)
+                        _widgetsState.value = BaseViewState.ErrorString(it.message)
                     }
                     is Resource.Loading -> {
-                        _postsState.value = BaseViewState.Loading
+                        _widgetsState.value = BaseViewState.Loading
                     }
                     is Resource.Success -> {
                         if(it.data.widgetList?.isNotEmpty() == true)
-                        _postsState.value = BaseViewState.Success(it.data)
+                        _widgetsState.value = BaseViewState.Success(it.data)
                     }
                 }
             }

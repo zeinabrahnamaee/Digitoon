@@ -9,16 +9,16 @@ import com.example.divartask.data.remote.APIService
 import com.example.divartask.data.remote.network.NetworkResponseAdapterFactory
 import com.example.divartask.data.repository.detail.DetailRepositoryImp
 import com.example.divartask.data.repository.places.PlacesRepositoryImp
-import com.example.divartask.data.repository.posts.PostsRepositoryImp
+import com.example.divartask.data.repository.widgets.WidgetsRepositoryImp
 import com.example.divartask.domain.repository.detail.DetailRepository
 import com.example.divartask.domain.repository.places.PlacesRepository
-import com.example.divartask.domain.repository.posts.PostsRepository
+import com.example.divartask.domain.repository.widgets.WidgetsRepository
 import com.example.divartask.domain.usecase.detail.GetDetailUseCase
 import com.example.divartask.domain.usecase.detail.GetDetailUseCaseImp
 import com.example.divartask.domain.usecase.places.GetPlacesUseCase
 import com.example.divartask.domain.usecase.places.GetPlacesUseCaseImp
-import com.example.divartask.domain.usecase.posts.GetPostsUseCase
-import com.example.divartask.domain.usecase.posts.GetPostsUseCaseImp
+import com.example.divartask.domain.usecase.widgets.GetWidgetsUseCase
+import com.example.divartask.domain.usecase.widgets.GetWidgetsUseCaseImp
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -91,14 +91,14 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun providePostsRepository(apiService: APIService): PostsRepository {
-        return PostsRepositoryImp(apiService)
+    fun providePostsRepository(apiService: APIService): WidgetsRepository {
+        return WidgetsRepositoryImp(apiService)
     }
 
     @Provides
     @Singleton
-    fun providePostsUseCase(repository: PostsRepository): GetPostsUseCase {
-        return GetPostsUseCaseImp(repository)
+    fun providePostsUseCase(repository: WidgetsRepository): GetWidgetsUseCase {
+        return GetWidgetsUseCaseImp(repository)
     }
 
     @Provides

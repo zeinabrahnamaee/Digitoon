@@ -1,15 +1,15 @@
-package com.example.divartask.presentation.posts
+package com.example.divartask.presentation.widgets
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.divartask.data.remote.entity.PostsData
-import com.example.divartask.databinding.PostViewItemBinding
+import com.example.divartask.data.remote.entity.Widgets
 import com.example.divartask.databinding.ProgressbarLayoutBinding
 import com.example.divartask.databinding.SubtitleViewItemBinding
 import com.example.divartask.databinding.TitleViewItemBinding
+import com.example.divartask.databinding.WidgetViewItemBinding
 import com.example.divartask.presentation.util.WidgetTypeEnum
 
 
@@ -21,8 +21,8 @@ const val VIEW_TYPE_LOADING = 3
 class PostsAdapter(
     private val onItemClicked: (token: String) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    var postList: ArrayList<PostsData.Post?> = arrayListOf()
-    fun setData(list: ArrayList<PostsData.Post?>){
+    var postList: ArrayList<Widgets.Widget?> = arrayListOf()
+    fun setData(list: ArrayList<Widgets.Widget?>){
         val oldSize = postList.size
         postList.addAll(list)
         notifyItemRangeChanged(oldSize,list.size)
@@ -75,7 +75,7 @@ class PostsAdapter(
             )
 
             VIEW_TYPE_POST -> PostViewHolder(
-                PostViewItemBinding.inflate(
+                WidgetViewItemBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
@@ -120,9 +120,9 @@ class PostsAdapter(
         RecyclerView.ViewHolder(binding.root) {
     }
     inner class PostViewHolder(
-        private val binding: PostViewItemBinding
+        private val binding: WidgetViewItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(post: PostsData.Post?) {
+        fun onBind(post: Widgets.Widget?) {
             binding.title.text = post?.data?.title
             binding.price.text = post?.data?.price
             binding.district.text = post?.data?.district
@@ -136,7 +136,7 @@ class PostsAdapter(
     inner class TitleViewHolder(
         private val binding: TitleViewItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(post: PostsData.Post?) {
+        fun onBind(post: Widgets.Widget?) {
             binding.textTitle.text = post?.data?.text
         }
     }
@@ -144,17 +144,17 @@ class PostsAdapter(
     inner class SubTitleViewHolder(
         private val binding: SubtitleViewItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(post: PostsData.Post?) {
+        fun onBind(post: Widgets.Widget?) {
             binding.textSubTitle.text = post?.data?.text
         }
     }
 }
 
-class RoomListDiffUtil : DiffUtil.ItemCallback<PostsData.Post?>() {
-    override fun areItemsTheSame(oldItem: PostsData.Post, newItem: PostsData.Post): Boolean =
+class RoomListDiffUtil : DiffUtil.ItemCallback<Widgets.Widget?>() {
+    override fun areItemsTheSame(oldItem: Widgets.Widget, newItem: Widgets.Widget): Boolean =
         oldItem == newItem
 
-    override fun areContentsTheSame(oldItem: PostsData.Post, newItem: PostsData.Post): Boolean =
+    override fun areContentsTheSame(oldItem: Widgets.Widget, newItem: Widgets.Widget): Boolean =
         oldItem.data?.token == newItem.data?.token
 
 }

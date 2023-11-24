@@ -1,4 +1,4 @@
-package com.example.divartask.presentation.posts
+package com.example.divartask.presentation.widgets
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,20 +11,20 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.divartask.R
-import com.example.divartask.data.remote.entity.PostsData
-import com.example.divartask.databinding.FragmentPostsBinding
+import com.example.divartask.data.remote.entity.Widgets
+import com.example.divartask.databinding.FragmentWidgetsBinding
 import com.example.divartask.presentation.util.BaseViewState
 import com.example.divartask.presentation.util.flowLife
 import com.example.divartask.presentation.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FragmentPosts : Fragment() {
+class FragmentWidgets : Fragment() {
 
-    private var _mBinding: FragmentPostsBinding? = null
+    private var _mBinding: FragmentWidgetsBinding? = null
     private val binding get() = _mBinding!!
 
-    private val viewModel by viewModels<PostsViewModel>()
+    private val viewModel by viewModels<WidgetsViewModel>()
 
     private var adapter: PostsAdapter? = null
     private var id: Int = 0
@@ -35,7 +35,7 @@ class FragmentPosts : Fragment() {
             goToDetailFragment(it)
         })
         id = arguments?.getInt("ID") ?: 0
-        viewModel.getPosts(id)
+        viewModel.getWidgets(id)
     }
 
     private fun goToDetailFragment(token: String) {
@@ -47,7 +47,7 @@ class FragmentPosts : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _mBinding = FragmentPostsBinding.inflate(inflater, container, false)
+        _mBinding = FragmentWidgetsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -59,7 +59,7 @@ class FragmentPosts : Fragment() {
 
 
     private fun collectPostsFlow() {
-        flowLife(viewModel.postsState) {
+        flowLife(viewModel.widgetsState) {
             when (it) {
                 is BaseViewState.Success -> {
                     showLoading(false)
@@ -79,8 +79,8 @@ class FragmentPosts : Fragment() {
         }
     }
 
-    private fun setDataToRecycler(widgetList: List<PostsData.Post>){
-        adapter?.setData(widgetList as ArrayList<PostsData.Post?>)
+    private fun setDataToRecycler(widgetList: List<Widgets.Widget>){
+        adapter?.setData(widgetList as ArrayList<Widgets.Widget?>)
     }
     private fun setupRecycler() {
         binding.rvPosts.adapter = adapter
@@ -94,7 +94,7 @@ class FragmentPosts : Fragment() {
                 (recyclerView.layoutManager as? LinearLayoutManager)?.let {
                     if (it.findLastCompletelyVisibleItemPosition() == it.itemCount- 1) {
                         adapter?.showLoading(true)
-                        viewModel.getPosts(id)
+                        viewModel.getWidgets(id)
                     }
                 }
 
