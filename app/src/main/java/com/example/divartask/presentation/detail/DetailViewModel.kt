@@ -21,11 +21,8 @@ class DetailViewModel @Inject constructor(
     private val detailUseCase: GetDetailUseCase
 ) : ViewModel() {
 
-    private val _detailState = MutableStateFlow<BaseViewState<DetailDomain>>(BaseViewState.Loading)
+    private val _detailState = MutableStateFlow<BaseViewState<List<DetailDomain>>>(BaseViewState.Loading)
     val detailState = _detailState.asStateFlow()
-
-    private val _sliderState = MutableSharedFlow<DetailData.Widget>(1)
-    val sliderState = _detailState.asSharedFlow()
 
     fun getDetail(token: String){
         viewModelScope.launch {
@@ -33,7 +30,7 @@ class DetailViewModel @Inject constructor(
                 when(it){
                     is Resource.Error -> { _detailState.value = BaseViewState.ErrorString(it.message)}
                     is Resource.Loading -> { _detailState.value = BaseViewState.Loading }
-                    is Resource.Success -> { _detailState.value = BaseViewState.Success(it.data.convertToDomainModel()) }
+                    is Resource.Success -> { _detailState.value = BaseViewState.Success(it.data) }
                 }
             }
         }

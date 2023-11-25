@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.room.Room
 import com.example.divartask.data.database.AppDatabase
+import com.example.divartask.data.database.dao.DetailDao
 import com.example.divartask.data.database.dao.PlacesDao
 import com.example.divartask.data.database.dao.WidgetsDao
 import com.example.divartask.data.remote.APIService
@@ -76,19 +77,6 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideDetailRepository(apiService: APIService): DetailRepository {
-        return DetailRepositoryImp(apiService)
-    }
-
-    @Provides
-    @Singleton
-    fun provideDetailUseCase(repository: DetailRepository): GetDetailUseCase {
-        return GetDetailUseCaseImp(repository)
-    }
-
-
-    @Provides
-    @Singleton
     fun provideAppDatabase(@ApplicationContext appContext: Context): AppDatabase {
         return Room.databaseBuilder(
             appContext,
@@ -131,5 +119,23 @@ object AppModule {
     @Singleton
     fun providePostsUseCase(repository: WidgetsRepository): GetWidgetsUseCase {
         return GetWidgetsUseCaseImp(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDetailDao(database: AppDatabase): DetailDao {
+        return database.detailDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideDetailRepository(apiService: APIService, dao: DetailDao): DetailRepository {
+        return DetailRepositoryImp(apiService, dao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDetailUseCase(repository: DetailRepository): GetDetailUseCase {
+        return GetDetailUseCaseImp(repository)
     }
 }

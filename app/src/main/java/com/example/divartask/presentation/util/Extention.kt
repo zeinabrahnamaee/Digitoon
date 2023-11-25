@@ -6,15 +6,19 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.room.TypeConverter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import com.example.divartask.data.database.entity.DetailEntity
 import com.example.divartask.data.database.entity.PlacesEntity
 import com.example.divartask.data.database.entity.WidgetsEntity
 import com.example.divartask.data.remote.entity.DetailData
 import com.example.divartask.domain.model.DetailDomain
 import com.example.divartask.domain.model.PlacesDomain
 import com.example.divartask.domain.model.WidgetsDomain
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.launch
@@ -27,43 +31,35 @@ fun <T> Fragment.flowLife(flow: Flow<T>, collector: FlowCollector<T>) {
     }
 }
 
-fun Fragment.showToast( message: String) {
+fun Fragment.showToast(message: String) {
     if (message.isNotEmpty())
         this.view?.let {
             Toast.makeText(
                 this.context,
-                message
-            , Toast.LENGTH_LONG).show()
+                message, Toast.LENGTH_LONG
+            ).show()
         }
 }
 
-fun DetailData.convertToDomainModel(): DetailDomain{
-    val widgetList: ArrayList< DetailDomain.Widget> = arrayListOf()
+fun DetailData.convertToDomainModel(): List<DetailDomain> {
+    val widgetList: ArrayList<DetailDomain> = arrayListOf()
     val items: ArrayList<String> = arrayListOf()
     widgets?.forEach {
         it.data?.items?.forEach {
-            items.add(it?.imageUrl?:"")
+            items.add(it?.imageUrl ?: "")
         }
         widgetList.add(
-            DetailDomain.Widget(
-                DetailDomain.Widget.Data(
-                    it.data?.imageUrl?: "",
-                    items,
-                    it.data?.showThumbnail?: false,
-                    it.data?.subtitle?: "",
-                    it.data?.text?: "",
-                    it.data?.title?: "",
-                    it.data?.value?: ""
-                ),
-                it.widgetType?:""
+            DetailDomain(
+                it.widgetType ?: "",
+                items,
+                it.data?.subtitle ?: "",
+                it.data?.text ?: "",
+                it.data?.title ?: "",
+                it.data?.value ?: ""
             )
         )
     }
-    return DetailDomain(
-        contactButtonText?: "",
-        enableContact?: false,
-        widgetList
-    )
+    return widgetList
 }
 
 fun ImageView.loadImageToView(url: String) {
@@ -80,7 +76,8 @@ fun ImageView.loadImageToView(url: String) {
 
 
 }
-fun List<PlacesEntity>.convertToPlacesDomainModel(): List<PlacesDomain>{
+
+fun List<PlacesEntity>.convertToPlacesDomainModel(): List<PlacesDomain> {
     val list: ArrayList<PlacesDomain> = arrayListOf()
     this.forEach {
         list.add(
@@ -90,7 +87,7 @@ fun List<PlacesEntity>.convertToPlacesDomainModel(): List<PlacesDomain>{
     return list
 }
 
-fun List<WidgetsEntity>.convertToWidgetsDomainModel(): List<WidgetsDomain>{
+fun List<WidgetsEntity>.convertToWidgetsDomainModel(): List<WidgetsDomain> {
 
     val list: ArrayList<WidgetsDomain> = arrayListOf()
     this.forEach {
@@ -105,6 +102,24 @@ fun List<WidgetsEntity>.convertToWidgetsDomainModel(): List<WidgetsDomain>{
                 it.thumbnail,
                 it.title,
                 it.token
+            )
+        )
+    }
+    return list
+}
+
+fun List<DetailEntity>.convertToDetailsDomainModel(): List<DetailDomain> {
+
+    val list: ArrayList<DetailDomain> = arrayListOf()
+    this.forEach {
+        list.add(
+            DetailDomain(
+                it.widgetType,
+                restoreList(it.items),
+                it.subTitle,
+                it.text,
+                it.title,
+                it.value,
             )
         )
     }

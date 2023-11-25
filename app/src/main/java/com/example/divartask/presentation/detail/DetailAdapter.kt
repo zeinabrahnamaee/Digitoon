@@ -20,9 +20,9 @@ const val TITLE_ROW = 3
 const val DESCRIPTION_ROW = 4
 
 class DetailAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private lateinit var widgetList: ArrayList<DetailDomain.Widget>
+    private lateinit var widgetList: ArrayList<DetailDomain>
 
-    fun setData(list: ArrayList<DetailDomain.Widget>){
+    fun setData(list: ArrayList<DetailDomain>){
         widgetList = list
     }
 
@@ -108,15 +108,15 @@ class DetailAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     inner class SliderViewHolder(
         private val binding: DetailSliderItemviewBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(widget: DetailDomain.Widget) {
-            binding.imageSlider.setImages(widget.data.items)
+        fun onBind(widget: DetailDomain) {
+            binding.imageSlider.setImages(widget.items)
         }
     }
         inner class TitleViewHolder(
             private val binding: DetailTitleItemviewBinding
         ) : RecyclerView.ViewHolder(binding.root) {
-            fun onBind(widget: DetailDomain.Widget) {
-                binding.title.text = widget.data.text
+            fun onBind(widget: DetailDomain) {
+                binding.title.text = widget.text
 
             }
         }
@@ -124,26 +124,26 @@ class DetailAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         inner class DescriptionViewHolder(
             private val binding: DetailDescriptionItemviewBinding
         ) : RecyclerView.ViewHolder(binding.root) {
-            fun onBind(widget: DetailDomain.Widget) {
-                binding.description.text = widget.data.text
+            fun onBind(widget: DetailDomain) {
+                binding.description.text = widget.text
             }
         }
 
         inner class HeaderViewHolder(
             private val binding: DetailHeaderItemviewBinding
         ) : RecyclerView.ViewHolder(binding.root) {
-            fun onBind(widget: DetailDomain.Widget) {
-                binding.title.text = widget.data.title
-                binding.subTitle.text = widget.data.subtitle
+            fun onBind(widget: DetailDomain) {
+                binding.title.text = widget.title
+                binding.subTitle.text = widget.subtitle
             }
         }
 
         inner class InfoViewHolder(
             private val binding: DetailInfoItemviewBinding
         ) : RecyclerView.ViewHolder(binding.root) {
-            fun onBind(widget: DetailDomain.Widget) {
-                binding.title.text = widget.data.title
-                binding.value.text = widget.data.value
+            fun onBind(widget: DetailDomain) {
+                binding.title.text = widget.title
+                binding.value.text = widget.value
             }
         }
 }

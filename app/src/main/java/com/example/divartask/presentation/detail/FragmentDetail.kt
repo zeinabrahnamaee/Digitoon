@@ -50,7 +50,7 @@ class FragmentDetail : Fragment() {
             when(it){
                 is BaseViewState.Success -> {
                     showLoading(false)
-                    setupAdapter(it.data.widgets)
+                    setupAdapter(it.data)
                 }
                 is BaseViewState.Loading -> {
                     showLoading(true)
@@ -64,8 +64,8 @@ class FragmentDetail : Fragment() {
         }
     }
 
-    private fun setupAdapter(widgets: List<DetailDomain.Widget>) {
-        adapter?.setData(widgets as ArrayList<DetailDomain.Widget>)
+    private fun setupAdapter(widgets: List<DetailDomain>) {
+        adapter?.setData(widgets as ArrayList<DetailDomain>)
         binding.rvDetail.adapter = adapter
     }
 
