@@ -1,5 +1,7 @@
 package com.example.divartask.presentation.util
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -14,6 +16,7 @@ import com.example.divartask.data.database.entity.DetailEntity
 import com.example.divartask.data.database.entity.PlacesEntity
 import com.example.divartask.data.database.entity.WidgetsEntity
 import com.example.divartask.data.remote.entity.DetailData
+import com.example.divartask.data.remote.entity.UserLocationData
 import com.example.divartask.domain.model.DetailDomain
 import com.example.divartask.domain.model.PlacesDomain
 import com.example.divartask.domain.model.WidgetsDomain
@@ -124,4 +127,24 @@ fun List<DetailEntity>.convertToDetailsDomainModel(): List<DetailDomain> {
         )
     }
     return list
+}
+
+fun UserLocationData.convertToLocationDomainModel(): PlacesDomain {
+
+    return PlacesDomain(
+        this.name?:"",
+        this.id?:0
+    )
+}
+
+fun Context.putIdInSharedPref(id: Int){
+    val sharedPref: SharedPreferences = getSharedPreferences("AppSharedPref", 0)
+    val editor = sharedPref.edit()
+    editor.putInt("ID", id)
+    editor.commit()
+}
+
+fun Context.getIdFromSharedPref(): Int{
+    val sharedPref: SharedPreferences = getSharedPreferences("AppSharedPref", 0)
+    return sharedPref.getInt("ID", 1)
 }

@@ -19,6 +19,8 @@ import com.example.divartask.domain.usecase.detail.GetDetailUseCase
 import com.example.divartask.domain.usecase.detail.GetDetailUseCaseImp
 import com.example.divartask.domain.usecase.places.GetPlacesUseCase
 import com.example.divartask.domain.usecase.places.GetPlacesUseCaseImp
+import com.example.divartask.domain.usecase.usercity.GetUserLocUseCase
+import com.example.divartask.domain.usecase.usercity.GetUserLocUseCaseImp
 import com.example.divartask.domain.usecase.widgets.GetWidgetsUseCase
 import com.example.divartask.domain.usecase.widgets.GetWidgetsUseCaseImp
 import dagger.Module
@@ -119,6 +121,12 @@ object AppModule {
     @Singleton
     fun providePostsUseCase(repository: WidgetsRepository): GetWidgetsUseCase {
         return GetWidgetsUseCaseImp(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideLocUseCase(repository: WidgetsRepository): GetUserLocUseCase {
+        return GetUserLocUseCaseImp(repository)
     }
 
     @Provides

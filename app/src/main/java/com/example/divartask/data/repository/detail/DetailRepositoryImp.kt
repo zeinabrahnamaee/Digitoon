@@ -37,7 +37,7 @@ class DetailRepositoryImp @Inject constructor(
                 emit(Resource.Error("error in network"))
             }
         }
-        emit(Resource.Success(dao.getDetail(token).convertToDetailsDomainModel()))
+        emit(Resource.Success(dao.getDetail(token).convertToDetailsDomainModel().distinct()))
     }.flowOn(Dispatchers.IO)
 
     private fun convertToEntities(result: List<DetailDomain>, token: String): List<DetailEntity> {

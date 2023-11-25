@@ -1,5 +1,6 @@
 package com.example.divartask.presentation.places
 
+import android.location.LocationManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import com.example.divartask.databinding.FragmentPlacesBinding
 import com.example.divartask.domain.model.PlacesDomain
 import com.example.divartask.presentation.util.BaseViewState
 import com.example.divartask.presentation.util.flowLife
+import com.example.divartask.presentation.util.putIdInSharedPref
 import com.example.divartask.presentation.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -39,13 +41,14 @@ class FragmentPlaces : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getPlaces()
         adapter = PlacesAdapter(onItemClicked = { id ->
+            context?.putIdInSharedPref(id)
             goToPostsFragment(id)
         })
         collectPlacesFlow()
     }
 
     private fun goToPostsFragment(id: Int) {
-        findNavController().navigate(R.id.fragmentPosts, bundleOf("ID" to id))
+        findNavController().navigate(R.id.fragmentPosts)
     }
 
     private fun collectPlacesFlow() {

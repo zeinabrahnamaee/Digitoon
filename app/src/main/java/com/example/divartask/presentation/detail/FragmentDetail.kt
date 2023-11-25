@@ -65,8 +65,10 @@ class FragmentDetail : Fragment() {
     }
 
     private fun setupAdapter(widgets: List<DetailDomain>) {
-        adapter?.setData(widgets as ArrayList<DetailDomain>)
-        binding.rvDetail.adapter = adapter
+        if (widgets.isNotEmpty()){
+            adapter?.setData(widgets as ArrayList<DetailDomain>)
+            binding.rvDetail.adapter = adapter
+        }
     }
 
     private fun showLoading(isShow: Boolean) {
