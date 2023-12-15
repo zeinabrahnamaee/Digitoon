@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Divar Task"
+rootProject.name = "Digitoon Task"
 include(":app")
  

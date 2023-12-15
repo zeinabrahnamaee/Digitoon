@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.divartask"
+    namespace = "com.example.digitoon"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.divartask"
+        applicationId = "com.example.digitoon"
         minSdk = 24
         targetSdk = 33
         versionCode = 1

@@ -1,6 +1,16 @@
 <resources>
-    <string name="app_name">Divar Task</string>
-    <string name="choose_city_title">لطفا شهر خود را انتخاب کنید.</string>
-    <string name="choose_city_btn">انتخاب شهر</string>
-    <string name="no_location_detected">موقعیت مکانی یافت نشد!</string>
+    <string name="app_name">Digitoon Task</string>
+    <string name="choose_movie_title">Please choose your movie</string>
+    <string name="genre">Genre:</string>
+    <string name="director">Director:</string>
+    <string name="writer">Write:</string>
+    <string name="actors">Actors:</string>
+    <string name="plot">Plot:</string>
+    <string name="language">Language:</string>
+    <string name="country">Country:</string>
+    <string name="awards">Award:</string>
+    <string name="imdb">ImdbRating:</string>
+    <string name="type">Type:</string>
+    <string name="year">Year:</string>
+
 </resources>

@@ -1,11 +1,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.DivarTask" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.Digitoon" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.DivarTask" parent="Base.Theme.DivarTask" />
+    <style name="Theme.Digitoon" parent="Base.Theme.Digitoon" />
 
     <style name="TextStyle" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/black</item>
@@ -29,6 +29,6 @@
 
     <style name="grayStyle" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/gray</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">12sp</item>
     </style>
 </resources>

@@ -6,15 +6,225 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvDetail"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/logo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/padding_8dp"
-        android:visibility="gone"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_height="250dp"
+        android:scaleType="fitXY"
+        android:layout_margin="@dimen/margin_16dp"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/places_item_layout"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/title"
+        style="@style/TextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/padding_8dp"
+        app:layout_constraintTop_toBottomOf="@id/logo"
+        app:layout_constraintStart_toStartOf="@id/logo"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/released"
+        style="@style/TextSubStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/padding_8dp"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintStart_toStartOf="@id/logo"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/runTime"
+        style="@style/TextSubStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_8dp"
+        android:paddingVertical="@dimen/padding_8dp"
+        app:layout_constraintTop_toTopOf="@id/released"
+        app:layout_constraintStart_toEndOf="@id/released"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/genreTitle"
+        style="@style/TextSubStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/genre"
+        android:paddingVertical="@dimen/padding_8dp"
+        app:layout_constraintTop_toBottomOf="@id/runTime"
+        app:layout_constraintStart_toStartOf="@id/logo"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/genre"
+        style="@style/grayStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/padding_8dp"
+        android:layout_marginStart="@dimen/margin_8dp"
+        app:layout_constraintTop_toBottomOf="@id/runTime"
+        app:layout_constraintStart_toEndOf="@id/genreTitle"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/directorTitle"
+        style="@style/TextSubStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/padding_8dp"
+        android:text="@string/director"
+        app:layout_constraintTop_toBottomOf="@id/genre"
+        app:layout_constraintStart_toStartOf="@id/logo"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/director"
+        style="@style/grayStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/padding_8dp"
+        android:layout_marginStart="@dimen/margin_8dp"
+        app:layout_constraintTop_toBottomOf="@id/genre"
+        app:layout_constraintStart_toEndOf="@id/directorTitle"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/writerTitle"
+        style="@style/TextSubStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/writer"
+        android:paddingVertical="@dimen/padding_8dp"
+        app:layout_constraintTop_toBottomOf="@id/director"
+        app:layout_constraintStart_toStartOf="@id/logo"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/writer"
+        style="@style/grayStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/padding_8dp"
+        android:layout_marginStart="@dimen/margin_8dp"
+        app:layout_constraintTop_toBottomOf="@id/director"
+        app:layout_constraintStart_toEndOf="@id/writerTitle"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/actorsTitle"
+        style="@style/TextSubStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/actors"
+        android:paddingVertical="@dimen/padding_8dp"
+        app:layout_constraintTop_toBottomOf="@id/writer"
+        app:layout_constraintStart_toStartOf="@id/logo"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/actors"
+        style="@style/grayStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/padding_8dp"
+        android:layout_marginStart="@dimen/margin_8dp"
+        app:layout_constraintTop_toBottomOf="@id/writer"
+        app:layout_constraintStart_toEndOf="@id/actorsTitle"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/plotTitle"
+        style="@style/TextSubStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/plot"
+        android:paddingTop="@dimen/padding_8dp"
+        app:layout_constraintTop_toBottomOf="@id/actors"
+        app:layout_constraintStart_toStartOf="@id/logo"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/plot"
+        style="@style/grayStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/padding_4dp"
+        android:paddingBottom="@dimen/padding_8dp"
+        android:layout_marginEnd="@dimen/margin_8dp"
+        app:layout_constraintTop_toBottomOf="@id/plotTitle"
+        app:layout_constraintStart_toStartOf="@id/logo"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/languageTitle"
+        style="@style/TextSubStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/language"
+        android:paddingVertical="@dimen/padding_8dp"
+        app:layout_constraintTop_toBottomOf="@id/plot"
+        app:layout_constraintStart_toStartOf="@id/logo"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/language"
+        style="@style/grayStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/padding_8dp"
+        android:layout_marginStart="@dimen/margin_8dp"
+        app:layout_constraintTop_toBottomOf="@id/plot"
+        app:layout_constraintStart_toEndOf="@id/languageTitle"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/countryTitle"
+        style="@style/TextSubStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/padding_8dp"
+        android:text="@string/country"
+        app:layout_constraintTop_toBottomOf="@id/language"
+        app:layout_constraintStart_toStartOf="@id/logo"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/country"
+        style="@style/grayStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/padding_8dp"
+        android:layout_marginStart="@dimen/margin_8dp"
+        app:layout_constraintTop_toBottomOf="@id/language"
+        app:layout_constraintStart_toEndOf="@id/countryTitle"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/awardsTitle"
+        style="@style/TextSubStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/padding_8dp"
+        android:text="@string/awards"
+        app:layout_constraintTop_toBottomOf="@id/country"
+        app:layout_constraintStart_toStartOf="@id/logo"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/awards"
+        style="@style/grayStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/padding_8dp"
+        android:layout_marginStart="@dimen/margin_8dp"
+        app:layout_constraintTop_toBottomOf="@id/country"
+        app:layout_constraintStart_toEndOf="@id/awardsTitle"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/imdbTitle"
+        style="@style/TextSubStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/padding_8dp"
+        android:text="@string/imdb"
+        app:layout_constraintTop_toBottomOf="@id/awards"
+        app:layout_constraintStart_toStartOf="@id/logo"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/imdb"
+        style="@style/grayStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/padding_8dp"
+        android:layout_marginStart="@dimen/margin_8dp"
+        app:layout_constraintTop_toBottomOf="@id/awards"
+        app:layout_constraintStart_toEndOf="@id/imdbTitle"/>
 
     <ProgressBar
         android:id="@+id/progress_loading"
@@ -25,5 +235,13 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/groupTitles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="actorsTitle,awardsTitle,countryTitle,directorTitle,genreTitle,imdbTitle,languageTitle,plotTitle,writerTitle"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
